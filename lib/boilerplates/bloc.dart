@@ -22,6 +22,9 @@ class ${name}Bloc {
   /// the state getter of $name
   List<$name>? get state => _state;
 
+  /// the current event of $name stream
+  ${name}State get event => _controller.value;
+
   /// the singleton
   static final ${name}Bloc instance = ${name}Bloc._();
 
