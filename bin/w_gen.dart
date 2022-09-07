@@ -9,7 +9,9 @@ void main(List<String> arguments) {
     print('''
 Boiler plate code generator by melWiss
 Usage:
-        w-gen -c [name] -[msb]
+        w-gen -c [name] -[msb] [--with-synchro]
+  
+  --with-synchro  creates the boilerplate using synchro_http package
 ''');
   }
   var createCommand = CreateCommand();

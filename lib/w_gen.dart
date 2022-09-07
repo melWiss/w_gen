@@ -14,6 +14,8 @@ class CreateCommand {
 
   ArgParser get create => _create;
 
+  bool withSynchro = false;
+
   CreateCommand() {
     _create.addOption(
       "create",
@@ -26,6 +28,21 @@ class CreateCommand {
       callback: (p0) {
         if (p0) {
           _createModel();
+        }
+      },
+    );
+    _create.addFlag(
+      "with-synchro",
+      callback: (p0) {
+        withSynchro = p0;
+        if (_arg != null) {
+          if (p0) {
+            Process.runSync("flutter", ["pub", "add", "synchro_http"]);
+            print("running flutter pub add synchro_http");
+          } else {
+            Process.runSync("flutter", ["pub", "add", "rxdart", "http"]);
+            print("running flutter pub add rxdart http");
+          }
         }
       },
     );
@@ -69,7 +86,7 @@ class CreateCommand {
     // if (!file.existsSync() && _arg != null) {
     if (_arg != null) {
       file.createSync(recursive: true);
-      file.writeAsStringSync(serviceString(_arg!));
+      file.writeAsStringSync(serviceString(_arg!, withSynchro));
     }
   }
 
@@ -85,7 +102,7 @@ class CreateCommand {
     if (_arg != null) {
       file1.createSync(recursive: true);
       file2.createSync(recursive: true);
-      file1.writeAsStringSync(blocString(_arg!));
+      file1.writeAsStringSync(blocString(_arg!, withSynchro));
       file2.writeAsStringSync(enumString(_arg!));
     }
   }

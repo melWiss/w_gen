@@ -1,8 +1,8 @@
-String serviceString(String name) {
+String serviceString(String name, bool withSynchro) {
   return '''
 import 'dart:convert';
 import '../models/${name.toLowerCase()}.dart';
-import 'package:synchro_http/synchro_http.dart';
+${withSynchro ? "import 'package:synchro_http/synchro_http.dart';" : ""}
 
 class ${name}Service {
   // TODO: [$name] add your missing static methods here.

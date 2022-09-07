@@ -1,6 +1,6 @@
-String blocString(String name) {
+String blocString(String name, bool withSynchro) {
   return '''
-import 'package:synchro_http/synchro_http.dart';
+${withSynchro ? "import 'package:synchro_http/synchro_http.dart';" : "import 'package:rxdart/rxdart.dart';"}
 import '../models/${name.toLowerCase()}.dart';
 import '../services/${name.toLowerCase()}.dart';
 import '../enums/${name.toLowerCase()}.dart';
@@ -31,9 +31,9 @@ class ${name}Bloc {
   /// private constructor
   ${name}Bloc._() {
     // TODO: [$name] load and sync your data here
-    fetchAll().whenComplete((){
+    ${withSynchro ? '''fetchAll().whenComplete((){
       SynchroHttp.singleton.sync.listen((event) {});
-    });
+    });''' : "fetchAll();"}
   }
 
   /// factory constructor, don't touch it
@@ -42,7 +42,7 @@ class ${name}Bloc {
   }
 
   /// fetches all $name
-  fetchAll() async {
+  Future fetchAll() async {
     _controller.add(${name}State.loading);
     _state = await ${name}Service.all();
     _controller.add(${name}State.loaded);
