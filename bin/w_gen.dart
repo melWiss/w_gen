@@ -11,7 +11,7 @@ Boiler plate code generator by melWiss
 Usage:
         w-gen -c [name] -[msb] [--with-synchro]
   
-  --with-synchro  creates the boilerplate using synchro_http package
+  --with-synchro  creates the boilerplate with synchro_http package
 ''');
   }
   var createCommand = CreateCommand();
