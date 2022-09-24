@@ -95,7 +95,7 @@ class CreateCommand {
     var path1 = join(Directory.current.path, "lib", "src", "blocs",
         "${_arg!.toLowerCase()}.dart");
     var file1 = File(path1);
-    var path2 = join(Directory.current.path, "lib", "src", "enums",
+    var path2 = join(Directory.current.path, "lib", "src", "events",
         "${_arg!.toLowerCase()}.dart");
     var file2 = File(path2);
     // if (!file1.existsSync() && !file2.existsSync() && _arg != null) {
